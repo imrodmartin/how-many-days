@@ -36,16 +36,6 @@ if(isset($_POST['submit'])  > 0)
   				."30,000 days and counting - " .date('l, F jS, Y', strtotime($sday ."+30000 days"))  .' - (just turned ' .$t3.')' ."<br /></div></div>";
 
 
-// Adding 1 to the query for tracking purposes
-
-$conn = new mysqli("localhost", "imrodmar_admin", "@Q(.@1MQ(Eqe", "imrodmar_dbase");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error); }
-$sql = ("update queries set number = number+1"); 
-if ($conn->query($sql) === TRUE) {
-    // echo "Record updated successfully";
-}
-
 
 
 }else{
