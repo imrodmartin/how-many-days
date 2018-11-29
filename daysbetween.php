@@ -7,7 +7,7 @@ if(isset($_POST['submit'])  > 0)
 $sdayfull = date("F jS, Y", strtotime($sday));
 $edayfull = date("F jS, Y", strtotime($eday));
 
-	
+// sets up starting date and ending date	
   $ndays = (strtotime($eday) - strtotime($sday)) / (60 * 60 * 24); 
   $years = (strtotime($eday) - strtotime($sday)) / (60 * 60 * 24 * 365.25);
   $months = (strtotime($eday) - strtotime($sday)) / (60 * 60 * 24 * 365.25 / 12);
