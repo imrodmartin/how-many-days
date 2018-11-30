@@ -2,10 +2,10 @@
 
 // main page for calculating how many days you've been alive
 // created by Rod Martin - @imrodmartin
+ 
 
 
-
-        date_default_timezone_set('America/Detroit');
+date_default_timezone_set('America/Detroit');
 
 if(isset($_POST['submit'])  > 0)
 {
