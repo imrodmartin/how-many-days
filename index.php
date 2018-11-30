@@ -88,6 +88,7 @@ echo date_picker("bday")?>
 </html>
 
 <?php
+// date picker function
 		function date_picker($name, $startyear=NULL, $endyear=NULL)
 {
     if($startyear==NULL) $startyear = date("Y");
