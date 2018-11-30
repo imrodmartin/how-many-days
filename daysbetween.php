@@ -1,6 +1,7 @@
 <?php
 
 // this sets up the days between two Dates
+// really helpful stuff 
 
 if(isset($_POST['submit'])  > 0)
 {
