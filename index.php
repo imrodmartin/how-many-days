@@ -2,7 +2,7 @@
 
 // main page for calculating how many days you've been alive
 // created by Rod Martin - @imrodmartin
-// working on a feature 1 branch
+
 
 
         date_default_timezone_set('America/Detroit');
