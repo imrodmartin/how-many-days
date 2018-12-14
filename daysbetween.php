@@ -1,7 +1,7 @@
 <?php
 
 // this sets up the days between two Dates
-// really helpful stuff 
+// really helpful stuff
 
 if(isset($_POST['submit'])  > 0)
 {
@@ -26,11 +26,8 @@ $edayfull = date("F jS, Y", strtotime($eday));
   $minutes = number_format($minutes,0,'.',',');
   $seconds = number_format($seconds,0,'.',',');
 
-
-
   $contentdiv = '<div style="margin: 0px auto; width: 600px;"><div style="font-size: 20px;">There have been <b>' .$ndays .' </b>days <br />between ' .$sdayfull .' and ' .$edayfull .'</div>' .'<br /><br /></div>'
       . '<p style="font-size: 14px;"><b>That equals</b><br /> ' .$years .' years<br />' .$months .' months<br />' .$hours .' hours<br />' .$minutes .' minutes<br />' .$seconds .' seconds</p>';
-
 
 }else{
 	$contentdiv = '<div id="content">Please enter the start date and end date below.</div>';
