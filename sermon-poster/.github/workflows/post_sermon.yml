@@ -1,0 +1,28 @@
+name: Post Sunday Sermon
+
+on:
+  schedule:
+    # 10:00 AM EST (UTC-5) = 15:00 UTC / 11:00 AM EDT (UTC-4) = 15:00 UTC
+    - cron: '0 15 * * 0'
+  workflow_dispatch: {}
+
+jobs:
+  post-sermon:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Post sermon to Drupal
+        run: python post_sermon.py
+        env:
+          DRUPAL_BASE_URL: ${{ secrets.DRUPAL_BASE_URL }}
+          DRUPAL_USER: ${{ secrets.DRUPAL_USER }}
+          DRUPAL_PASS: ${{ secrets.DRUPAL_PASS }}
