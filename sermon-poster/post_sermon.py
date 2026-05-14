@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-from base64 import b64encode
 from datetime import date
 
 import requests
@@ -65,12 +64,6 @@ def get_sermon_info() -> tuple[str, str]:
         raise RuntimeError("Could not find #message-scripture on sunday-message page")
 
     return title_el.get_text(strip=True), scripture_el.get_text(strip=True)
-
-
-def get_csrf_token(session: requests.Session, base_url: str) -> str:
-    resp = session.get(f"{base_url}/session/token", timeout=30)
-    resp.raise_for_status()
-    return resp.text.strip()
 
 
 def get_speaker_uuid(session: requests.Session, base_url: str, headers: dict) -> str:
@@ -174,13 +167,10 @@ def main() -> None:
     print("Finding latest YouTube video...")
     video_url = get_latest_video_url_with_retry()
 
-    print("Getting Drupal CSRF token...")
-    csrf_token = get_csrf_token(session, base_url)
-
+    # Basic auth does not require a CSRF token — that's only for cookie sessions
     write_headers = {
         "Content-Type": "application/vnd.api+json",
         "Accept": "application/vnd.api+json",
-        "X-CSRF-Token": csrf_token,
     }
     read_headers = {"Accept": "application/vnd.api+json"}
 
