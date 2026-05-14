@@ -8,10 +8,10 @@ import yt_dlp
 from bs4 import BeautifulSoup
 
 # Adjust these if your Drupal site uses different machine names
-SPEAKER_VOCAB = "speakers"
+SPEAKER_VOCAB = "speaker"
+SPEAKER_TID = 28
 MEDIA_BUNDLE = "remote_video"
 OEMBED_FIELD = "field_media_oembed_video"
-SPEAKER_NAME = "Pastor Bill Secrest"
 SUNDAY_MESSAGE_URL = "https://imrodmartin.github.io/sunday-message/"
 YOUTUBE_CHANNEL = "https://www.youtube.com/@fbcaurora"
 
@@ -67,18 +67,12 @@ def get_sermon_info() -> tuple[str, str]:
 
 
 def get_speaker_uuid(session: requests.Session, base_url: str, headers: dict) -> str:
-    url = (
-        f"{base_url}/jsonapi/taxonomy_term/{SPEAKER_VOCAB}"
-        f"?filter[name]={requests.utils.quote(SPEAKER_NAME)}"
-    )
+    url = f"{base_url}/jsonapi/taxonomy_term/{SPEAKER_VOCAB}?filter[drupal_internal__tid]={SPEAKER_TID}"
     resp = session.get(url, headers=headers, timeout=30)
     resp.raise_for_status()
     data = resp.json().get("data", [])
     if not data:
-        raise RuntimeError(
-            f"Speaker '{SPEAKER_NAME}' not found in taxonomy '{SPEAKER_VOCAB}'. "
-            "Check SPEAKER_VOCAB constant or the term name in Drupal."
-        )
+        raise RuntimeError(f"Speaker term {SPEAKER_TID} not found in vocabulary '{SPEAKER_VOCAB}'")
     return data[0]["id"]
 
 
